@@ -40,3 +40,33 @@ The second step is to build a model with MLflow. The code is available in the `s
 To run the code, you need to install the dependencies. You can do it with the following command:
 
 ```make install```
+
+### 2.2 - Run the model training
+
+Then, you can run the model training with the following command:
+
+```make model-train```
+
+### 2.3 - Run the MLflow UI (to make model production ready)
+
+To run the MLflow UI, you need to install the dependencies. You can do it with the following command:
+
+```make install```
+
+Then, you can run the MLflow UI with the following command:
+
+```make mlflow-ui```
+
+In the MLflow UI, you can see the model and the parameters used to train it.
+
+- go to http://localhost:5000
+- click on the 'Model' tab
+- select the version of the model
+- select the 'Stage' and click on 'Transition to Production'
+
+### 2.4 - Run the model prediction
+
+Then, you can run the model prediction with the following command:
+
+```make model-predict```
+
