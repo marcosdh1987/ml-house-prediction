@@ -19,10 +19,15 @@ The first step is to explore the data and build a model. The notebook is availab
 the notebook contains the following steps:
 
 1 - Data exploration
+
 2 - Data preparation
+
 3 - Model selection
+
 4 - Model evaluation
+
 5 - Model tuning
+
 6 - Model prediction
 
 
