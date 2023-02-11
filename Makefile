@@ -16,7 +16,30 @@ install:
 		pip install -r requirements.txt; \
 	)
 
+# to train and registry a new model
+model-train:
+	@source .venv/bin/activate; \
+	cd src/mlflow; \
+	python train_model.py
 
+model-serve:
+	@source .venv/bin/activate; \
+	cd src/mlflow; \
+	python model_serve.py
+
+
+# to make predictions
+model-predict:
+	@source .venv/bin/activate; \
+	cd src/mlflow; \
+	python predict.py 	
+
+
+# to run the MLFlow UI
+mlflow-ui:
+	@source .venv/bin/activate; \
+	cd src/mlflow; \
+	mlflow server --backend-store-uri sqlite:///mlruns.db -h 0.0.0.0 -p 5000 
 
 autoflake:
 	@autoflake . --check --recursive --remove-all-unused-imports --remove-unused-variables --exclude .venv;
