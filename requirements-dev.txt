@@ -1,0 +1,7 @@
+autoflake==1.7.7
+black==22.3.0
+isort==5.0.3
+pylint==2.6.0
+pytest==6.2.5
+pytest-cov==2.6.1
+Sphinx==2.1.2
