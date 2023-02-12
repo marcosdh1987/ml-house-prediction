@@ -41,6 +41,21 @@ mlflow-ui:
 	cd src/mlflow; \
 	mlflow server --backend-store-uri sqlite:///mlruns.db -h 0.0.0.0 -p 5000 
 
+# to run the API in dev mode
+run-dev:
+	@source .venv/bin/activate; \
+	flask --app src.flask.main run --host=0.0.0.0 --port=8000 & \
+	open http://localhost:8000/model_performance/
+
+# to run the API with uwsgi
+run:
+	@source .venv/bin/activate; \
+	uwsgi --http 0.0.0.0:8000 --master -p 4 -w src.flask.main:app
+	
+
+
+
+
 autoflake:
 	@autoflake . --check --recursive --remove-all-unused-imports --remove-unused-variables --exclude .venv;
 
