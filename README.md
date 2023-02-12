@@ -70,3 +70,22 @@ Then, you can run the model prediction with the following command:
 
 ```make model-predict```
 
+### 2.5 - Run the API 
+
+To run the Falsk API, you need to install the dependencies. You can do it with the following command:
+
+```make install```
+
+Then, you can run the Flask API with the following command:
+
+```make run``` or ```make run-dev```
+
+In the Flask API, you can see the model and the model performance.
+
+- go to http://localhost:5000/model_performance
+- go to http://localhost:5000/predict
+- go to http://localhost:5000/predict/{string:features}
+
+
+
+
