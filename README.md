@@ -93,3 +93,7 @@ The ML lifecycle architecture is available in the `src/img` folder.
 - [ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
 
 
+
+![ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
+
+
