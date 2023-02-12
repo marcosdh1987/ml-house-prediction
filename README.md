@@ -86,6 +86,14 @@ In the Flask API, you can see the model and the model performance.
 - go to http://localhost:5000/predict
 - go to http://localhost:5000/predict/{string:features}
 
+### 3 - ML lifecycle architecture
 
+The ML lifecycle architecture is available in the `src/img` folder.
+
+- [ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
+
+
+
+![ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
 
 

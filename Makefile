@@ -16,6 +16,11 @@ install:
 		pip install -r requirements.txt; \
 	)
 
+model-etl:
+	@source .venv/bin/activate; \
+	cd src/mlflow; \
+	python etl.py
+
 # to train and registry a new model
 model-train:
 	@source .venv/bin/activate; \
@@ -52,9 +57,6 @@ run:
 	@source .venv/bin/activate; \
 	uwsgi --http 0.0.0.0:8000 --master -p 4 -w src.flask.main:app
 	
-
-
-
 
 autoflake:
 	@autoflake . --check --recursive --remove-all-unused-imports --remove-unused-variables --exclude .venv;
