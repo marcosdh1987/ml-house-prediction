@@ -18,8 +18,7 @@ install:
 
 model-etl:
 	@source .venv/bin/activate; \
-	cd src/mlflow; \
-	python etl.py
+	python src/mlflow/etl.py
 
 # to train and registry a new model
 model-train:
@@ -74,3 +73,8 @@ lint-fix:
 	@black . --exclude '.venv|build|target|dist';
 	@isort .;
 	@autoflake . --in-place --recursive --exclude .venv --remove-all-unused-imports --remove-unused-variables;
+
+
+test:
+	@source .venv/bin/activate; \
+	pytest $(TEST) --cov=src --cov-report=term-missing

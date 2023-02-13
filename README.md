@@ -41,9 +41,15 @@ To run the code, you need to install the dependencies. You can do it with the fo
 
 ```make install```
 
-### 2.2 - Run the model training
+### 2.2 - Run the model ETL
 
-Then, you can run the model training with the following command:
+Then, you can run the model ETL with the following command:
+
+```make model-etl```
+
+### 2.3 - Run the model training
+
+Next, you can run the model training with the following command:
 
 ```make model-train```
 
@@ -86,12 +92,18 @@ In the Flask API, you can see the model and the model performance.
 - go to http://localhost:5000/predict
 - go to http://localhost:5000/predict/{string:features}
 
-### 3 - ML lifecycle architecture
+
+### 3 - Test etl
+
+To make a test you can run the following command:
+
+```make test-etl```
+
+### 4 - ML lifecycle architecture
 
 The ML lifecycle architecture is available in the `src/img` folder.
 
 - [ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
-
 
 
 ![ML lifecycle architecture](src/img/ml_lifecycle_architecture.png)
