@@ -1,6 +1,7 @@
 # Import the necessary libraries
 import argparse
 import json
+import os
 import pickle
 import re
 import warnings
@@ -10,37 +11,47 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler
+from utils.constants import (COLUMNS_FILENAME, PREPROCESSOR_FILENAME,
+                             RAW_FILENAME, X_TEST_FILENAME, X_TRAIN_FILENAME,
+                             Y_TEST_FILENAME, Y_TRAIN_FILENAME)
 
 warnings.filterwarnings("ignore")
 
-
-# defining the path to the dataset
-path = "../data/raw/challenge_houses-prices.csv"
-
-# reading the dataset
-df = pd.read_csv(path)
+# defining the default path to the dataset
+raw_filename = RAW_FILENAME
+x_train_filename = X_TRAIN_FILENAME
+y_train_filename = Y_TRAIN_FILENAME
+x_test_filename = X_TEST_FILENAME
+y_test_filename = Y_TEST_FILENAME
+preprocessor_filename = PREPROCESSOR_FILENAME
+columns_filename = COLUMNS_FILENAME
+# get the execution path
+execution_path = os.getcwd()
+# join the execution path with the path to the dataset
+key = os.path.join(execution_path, raw_filename)
 
 
 def save(X_train_tf, X_test_tf, y_train, y_test):
-    X_train_tf.to_parquet("../data/processed/X_train_tf.parquet")
-    X_test_tf.to_parquet("../data/processed/X_test_tf.parquet")
+    X_train_tf.to_parquet(os.path.join(execution_path, x_train_filename))
+    X_test_tf.to_parquet(os.path.join(execution_path, x_test_filename))
     # change series to dataframe
     y_train = pd.DataFrame(y_train)
     y_test = pd.DataFrame(y_test)
-    y_train.to_parquet("../data/processed/y_train.parquet")
-    y_test.to_parquet("../data/processed/y_test.parquet")
+    y_train.to_parquet(os.path.join(execution_path, y_train_filename))
+    y_test.to_parquet(os.path.join(execution_path, y_test_filename))
 
 
 def save_preprocessor(preprocessor, X_train):
-    pickle.dump(preprocessor, open("../models/preprocessor.pkl", "wb"))
+    pickle.dump(
+        preprocessor, open(os.path.join(execution_path, preprocessor_filename), "wb")
+    )
     # save column names in json file
-    with open("../models/columns.json", "w") as f:
+    with open(os.path.join(execution_path, columns_filename), "w") as f:
         json.dump(X_train.columns.tolist(), f)
 
 
-def etl(args):
+def etl(filepath):
 
-    filepath = args.filepath
     df = pd.read_csv(filepath)
     # define target column, and retrieve list of attributes from the dataframe
     id_cols = []  # If the dataset has an ID column, it should be included here
@@ -105,9 +116,10 @@ def etl(args):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--filepath", type=str, help="filepath", default=path)
+    # Add the arguments to the parser to be used in the etl function if not input by the user use the default value
+    parser.add_argument("--filepath", type=str, help="filepath", default=key)
     args = parser.parse_args()
     print("ETL process started")
-    print("REading the dataset from: ", args.filepath)
-    etl(args)
+    print("Reading the dataset from: ", args.filepath)
+    etl(key)
     print("ETL process finished")
